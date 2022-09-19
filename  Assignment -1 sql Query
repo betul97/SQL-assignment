@@ -1,0 +1,39 @@
+CREATE DATABASE Manufacturer1;
+USE Manufacturer1;
+
+CREATE TABLE [Product](
+	[prod_ID] [int] PRIMARY KEY NOT NULL,
+	[Prod_Name] [nvarchar](50) NOT NULL,
+	[quantity] [int] NOT NULL
+ );
+CREATE TABLE [Component](
+    [comp_id] [int] PRIMARY KEY NOT NULL,
+	[comp_name] [varchar](50) Not NULL,
+	[description] [varchar](50) Not NULL,
+    [quantity_comp][int]
+	);
+
+
+CREATE TABLE [Supplier](
+	[supp_id] [int] PRIMARY KEY  NOT NULL,
+	[supp_name] [varchar](50),
+    [supp_location] [varchar](50),
+    [supp_country] [varchar](50),
+    [is_active][bit]
+	);
+CREATE TABLE [Prod_Comp](
+	[prod_id] [int] PRIMARY KEY  NOT NULL,
+	[comp_id] [int] ,
+    [quantity_comp] [int]
+    );
+CREATE TABLE [Comp_Supp](
+	[supp_id] [int] PRIMARY KEY  NOT NULL,
+	[comp_id] [int] ,
+    [order_date] [date],
+	[quantity][int]
+    );	
+
+ALTER TABLE Prod_comp ADD FOREIGN KEY (prod_id) REFERENCES Product (prod_id)
+ALTER TABLE Prod_comp ADD FOREIGN KEY (comp_id) REFERENCES Component (comp_id)
+ALTER TABLE Comp_supp ADD FOREIGN KEY (supp_id) REFERENCES Supplier (supp_id)
+ALTER TABLE Comp_supp ADD FOREIGN KEY (comp_id) REFERENCES Component (comp_id)
